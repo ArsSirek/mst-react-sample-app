@@ -20,6 +20,23 @@ export class OpenWeatherMap extends Weather {
       throw new Error('no response');
     });
   }
+
+  static getForCoords({ latitude, longitude }) {
+    return axios({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHERMAP_KEY}`,
+    }).then((response) => {
+      if (response.status === 200) {
+        const { data } = response;
+        return {
+          name: data.name,
+          weather: data.weather[0].main,
+          temp: data.main.temp,
+        };
+      }
+      throw new Error('no response');
+    });
+  }
 }
 
 export default OpenWeatherMap;

@@ -48,14 +48,16 @@ export const AppStore = types.model(
     updateWeather(city, data) {
       self.weather.set(city, data);
     },
-    addCity(newCityName) {
+    addCity(newCityName, silent = false) {
       if (self.cities.indexOf(newCityName) === -1) {
         self.cities.push(newCityName);
-        self.weatherProvider.getForCity(newCityName).then((weatherData) => {
-          // can not modify observable property through callback functions,
-          // only in the action function body
-          self.updateWeather(weatherData.name, weatherData);
-        });
+        if (!silent) {
+          self.weatherProvider.getForCity(newCityName).then((weatherData) => {
+            // can not modify observable property through callback functions,
+            // only in the action function body
+            self.updateWeather(weatherData.name, weatherData);
+          });
+        }
       }
     },
     updateData() {

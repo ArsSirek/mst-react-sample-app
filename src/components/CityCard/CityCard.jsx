@@ -43,7 +43,7 @@ export const CityCard = (props) => {
         </span>
         <span>
           temp -
-          {temp}
+          {` ${temp}`}
         </span>
       </div>
     </Card>

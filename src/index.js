@@ -83,3 +83,18 @@ document.title = getTitle(appStore);
 if (!isProduction) {
   window.appStore = appStore;
 }
+
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition( (position) => {
+    // console.log({position});
+    OpenWeatherMap.getForCoords({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    }).then((weatherData) => {
+      // console.log({weatherData});
+      appStore.addCity(weatherData.name, true);
+      appStore.updateWeather(weatherData.name, weatherData);
+    });
+  });
+}
