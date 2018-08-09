@@ -5,11 +5,18 @@ import createRouter from './utils/router';
 import { AppStore } from './store/AppStore';
 import { getTitle } from './app/pageTitles';
 import renderApp from './app/AppWrapper';
+import { isProduction } from './utils/constants';
+
+import { OpenWeatherMap } from './gateways/Weather';
 
 const initialState = {};
 
 const appStore = AppStore.create(
   initialState,
+  {
+    storage: window.localStorage,
+    weather: OpenWeatherMap,
+  },
 );
 
 when(
@@ -71,3 +78,7 @@ document.title = getTitle(appStore);
 /* @todo add favicon and manifest */
 // import '!file-loader?name=[name].[ext]!./favicon.ico';
 // import '!file-loader?name=[name].[ext]!./manifest.json';
+
+if (!isProduction) {
+  window.appStore = appStore;
+}

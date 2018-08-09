@@ -1,7 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
-// const webpack = require('webpack'); // to access built-in plugins
+const webpack = require('webpack'); // to access built-in plugins
+const path = require('path');
 
-module.exports = {
+require('dotenv').config({path: path.join(__dirname, '.env')});
+const openweathermapKey = process.env.openweathermap_key || 'some-default-dev-key';
+
+
+let config = {
   entry: './src/index.js',
   module: {
     rules: [
@@ -14,6 +19,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        openweathermap_key: `"${openweathermapKey}"`,
+      },
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -22,3 +32,6 @@ module.exports = {
     contentBase: './dist',
   },
 };
+
+
+module.exports = config;

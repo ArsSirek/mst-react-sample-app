@@ -3,11 +3,33 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const Card = styled.div`
-  background: red;
+export const CitiesBlock = styled.div`
+  display:flex;
+  padding: 1em;
+  justify-content: space-around;
+   & > div {
+    display: inline-block;
+    flex:1;
+   }
 `;
 
-const CityCard = (props) => {
+export const Card = styled.div`
+  border:  2px solid rgba(255, 255, 255, .5);
+  background: white;
+  font-size: 24px;
+  margin: 1em;
+
+  & div {
+    padding: 1em;
+    font-size: 16px;
+  }
+  span {
+    padding-top: 0.2em;
+    border-top: 1px solid black;
+  }
+`;
+
+export const CityCard = (props) => {
   const { name, weather, temp } = props;
   return (
     <Card>

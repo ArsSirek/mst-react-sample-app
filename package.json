@@ -21,8 +21,11 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.12.0",
@@ -33,8 +36,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config ./webpack.config.js  --open --mode development",
-    "dev": "webpack --mode=development",
+    "start": "webpack-dev-server --config ./webpack.config.js  --open --mode=development",
+    "dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
   },
   "author": "Arsen Sirekanyan <Ars-Sirekanyan@yandex.ru>",

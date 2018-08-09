@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Clear Styles -->
-    <style>
+    <style id="globalStyles">
         html,
         body {
             font-size: 16px;
@@ -36,14 +36,11 @@
         }
     </style>
 </head>
-<body>
+<body  style="min-height: 100vh;min-width: 100%; margin:0;">
 <!-- Display a message if JS has been disabled on the browser. -->
 <noscript>If you're seeing this message, that means <strong>JavaScript has been disabled on your browser</strong>,
     please <strong>enable JS</strong> to make this app work.
 </noscript>
-
-<div id="notification-portal"></div>
-
 <div id="app" style="min-height: 100vh;min-width: 100%;">
     <!--Simple animation sample (source: https://loading.io/css/) -->
     <style>.lds-dual-ring {

@@ -1,20 +1,27 @@
 import React from 'react';
-import { inject, observer } from 'mobx-react';
+import { inject, Observer } from 'mobx-react';
 
 import { Page, PageHeader, PageBody } from '../../components/Page';
-import { SearchBar } from './elements';
+import { CitiesBlock } from '../../components/CityCard';
+import { SearchBar, City } from './elements';
 
-@inject('store')
-@observer
-export default class Dashboard extends React.Component {
+@inject('appStore')
+export class Dashboard extends React.Component {
   render() {
     return (
       <Page>
         <PageHeader title="Dashboard" />
         <PageBody>
           <SearchBar />
+          <CitiesBlock>
+            <Observer>
+              {() => this.props.appStore.cities.map( city => <City key={city} city={city} />)}
+            </Observer>
+          </CitiesBlock>
         </PageBody>
       </Page>
     );
   }
 }
+
+export default Dashboard;

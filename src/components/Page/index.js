@@ -1,1 +1,1 @@
-export default, { Page, PageHeader, PageBody } from './Page';
+export * from './Page';
