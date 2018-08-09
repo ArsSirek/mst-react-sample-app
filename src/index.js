@@ -62,6 +62,7 @@ const hash = location.hash ? location.hash.slice(1) : null;
 const router = createRouter({
   /* first match go ? */
   '/dashboard': () => appStore.view.openDashboard({ query: queryParams, hash }),
+  '/city/:name': ({ name }) => appStore.view.openDashboard({ name }),
   '/': () => appStore.view.openDashboard({ query: queryParams, hash }),
 }, routerProps);
 

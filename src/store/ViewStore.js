@@ -8,6 +8,7 @@ const ViewStore = types.model('ViewStore',
     page: types.optional(types.string, 'dashboard'),
     hash: types.frozen(),
     query: types.optional(types.frozen(), {}),
+    selectedCity: types.optional(types.string, ''),
   })
   .views(self => ({
     get app() {
@@ -34,6 +35,8 @@ const ViewStore = types.model('ViewStore',
       switch (pageName) {
         case 'dashboard':
           return '/dashboard';
+        case 'city':
+          return `/city/${self.selectedCity}`;
         default:
           return `/${pageName}`;
       }
@@ -43,7 +46,7 @@ const ViewStore = types.model('ViewStore',
     openPageByName(pageName, params = null) {
       switch (pageName) {
         case 'dashboard':
-          self.openDashboard({query: params});
+          self.openDashboard({ query: params });
           break;
         default:
           self.openErrorPage();
@@ -52,6 +55,11 @@ const ViewStore = types.model('ViewStore',
     },
     openDashboard() {
       self.page = 'dashboard';
+      // any business logic on page load can be initiated from here
+    },
+    openCity({ name }) {
+      self.page = 'city';
+      self.selectedCity = name;
       // any business logic on page load can be initiated from here
     },
     openErrorPage() {

@@ -32,7 +32,7 @@ export const Card = styled.div`
 export const CityCard = (props) => {
   const { name, weather, temp } = props;
   return (
-    <Card>
+    <Card {...props}>
       <div>
         {name}
       </div>
@@ -53,7 +53,7 @@ export const CityCard = (props) => {
 CityCard.propTypes = {
   name: PropTypes.string.isRequired,
   weather: PropTypes.string.isRequired,
-  temp: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
 
 };
 

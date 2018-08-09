@@ -20,6 +20,11 @@ export class City extends React.Component {
     }
   }
 
+  cardLicked = () => {
+    console.log('clicked');
+    this.props.appStore.view.openCity({ name: this.props.city });
+  };
+
   render() {
     const data = this.cityWeather;
     if (!data) {
@@ -30,7 +35,13 @@ export class City extends React.Component {
       );
     }
     return (
-      <CityCard name={data.name} temp={data.temp} weather={data.weather} />
+      <CityCard
+        onClick={this.cardLicked}
+        style={{ cursor: 'pointer' }}
+        name={data.name}
+        temp={data.temp}
+        weather={data.weather}
+      />
     );
   }
 }
