@@ -1,9 +1,11 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 
+import Dashboard from '../screens/Dashboard';
+
 @inject('appStore')
 @observer
-export default class App extends React.Component {
+export class App extends React.Component {
 
   render() {
     const view = {this.props.appStore}
@@ -17,4 +19,4 @@ export default class App extends React.Component {
   }
 }
 
-import Dashboard from '../screens/Dashboard';
+export default App;
