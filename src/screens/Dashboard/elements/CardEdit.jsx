@@ -80,7 +80,11 @@ export class CardEdit extends React.Component {
               value={this.state.title}
               onChange={this.onTitleChange}
             />
-            <textarea value={this.state.description} onChange={this.onDescriptionChange} />
+            <textarea
+              value={this.state.description}
+              onChange={this.onDescriptionChange}
+              placeholder="description"
+            />
             <UserSelect ref={this.userSelect} userId={this.props.card.fields.userId} />
             <button type="submit">
               Save

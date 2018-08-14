@@ -24,7 +24,9 @@ export const CardBody = styled.div`
   min-height:20px;
   
   > *, input {
-    max-width: calc( 100% - 10px);
+    max-width: 180px;
+    width: 180px;
+    box-sizing: border-box;
     margin: 5px;
   }
   
