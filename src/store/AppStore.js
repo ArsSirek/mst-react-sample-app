@@ -21,11 +21,27 @@ export const AppStore = types.model(
     view: types.optional(ViewStore, {}),
     cards: types.optional(types.array(Card), []),
     users: types.optional(types.array(User), []),
+    filter: '',
   },
 )
   .views(self => ({
     get storage() {
       return getEnv(self).storage;
+    },
+    get filteredCards() {
+      if (self.filter === '') {
+        return self.cards;
+      }
+      return this.cards.filter(card => {
+        if (card.fields.title && (card.fields.title.indexOf(self.filter) !== -1)) {
+          return true;
+        }
+        if (card.fields.userId) {
+          const user = self.getUser(card.fields.userId);
+          return user.name.indexOf(self.filter) !== -1;
+        }
+        return false;
+      });
     },
     getUser(userId) {
       return resolveIdentifier(User, self, userId);
@@ -73,6 +89,9 @@ export const AppStore = types.model(
         name: username,
       });
       return self.users[self.users.length - 1];
+    },
+    setFilter(newValue) {
+      self.filter = newValue;
     },
   }));
 

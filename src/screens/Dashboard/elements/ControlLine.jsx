@@ -2,6 +2,8 @@ import React from 'react';
 
 import { AddTask } from './AddTask';
 
+import { SearchBar } from './SearchBar';
+
 export const ControlLine = () => (
   <div style={{
     textAlign: 'right',
@@ -9,6 +11,7 @@ export const ControlLine = () => (
   }}
   >
     <AddTask />
+    <SearchBar />
   </div>
 );
 

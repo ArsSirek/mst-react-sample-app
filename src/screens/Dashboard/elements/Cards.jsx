@@ -28,7 +28,7 @@ export class Cards extends React.Component {
             >
               <Observer>
                 { () => (
-                  this.props.appStore.cards.map((card, i) => (
+                  this.props.appStore.filteredCards.map((card, i) => (
                     <Draggable key={card.id} draggableId={card.id} index={i}>
                       {providedDragable => (
                         <Card
