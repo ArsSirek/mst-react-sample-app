@@ -4,9 +4,11 @@ import {
   onSnapshot,
   applySnapshot,
   getEnv,
+  resolveIdentifier
 } from 'mobx-state-tree';
 
-import { Card } from './models/Card';
+import {Card} from './models/Card';
+import {User} from './models/User';
 
 import ViewStore from './ViewStore';
 
@@ -18,11 +20,15 @@ export const AppStore = types.model(
     isLoading: types.optional(types.boolean, true),
     view: types.optional(ViewStore, {}),
     cards: types.optional(types.array(Card), []),
+    users: types.optional(types.array(User), []),
   },
 )
   .views(self => ({
     get storage() {
       return getEnv(self).storage;
+    },
+    getUser(userId) {
+      return resolveIdentifier(User, self, userId);
     },
   }))
   .actions(self => ({
@@ -62,6 +68,12 @@ export const AppStore = types.model(
 
       self.cards = result;
     },
-}));
+    addUser(username) {
+      self.users.push({
+        name: username,
+      });
+      return self.users[self.users.length - 1];
+    },
+  }));
 
 export default AppStore;

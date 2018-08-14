@@ -7,8 +7,8 @@ export const CardsBlock = styled.div`
 `;
 
 export const CardStyled = styled.div`
-  width: 80px;
-  min-height:200px;
+  width: 200px;
+  min-height:100px;
   margin: 10px;
   padding: 5px;
   background: white;
@@ -23,9 +23,13 @@ export const CardBody = styled.div`
   padding-top:10px;
   min-height:20px;
   
-  * {
+  > *, input {
     max-width: calc( 100% - 10px);
     margin: 5px;
+  }
+  
+  > .react-autosuggest__container {
+    margin: 0;
   }
 `;
 

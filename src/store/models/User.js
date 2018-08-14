@@ -2,12 +2,11 @@ import { types, getParent } from 'mobx-state-tree';
 
 import { getRandomString } from '../../utils/index';
 
-export const Card = types.model(
-  'Card',
+export const User = types.model(
+  'User',
   {
     id: types.identifier,
-    isEditing: types.optional(types.boolean, false),
-    fields: types.frozen(),
+    name: types.string,
   },
 ).preProcessSnapshot((snapshot) => {
   const change = {};
@@ -22,19 +21,9 @@ export const Card = types.model(
     },
   }))
   .actions(self => ({
-    toggleIsEditing(newValue) {
-      if (newValue === undefined) {
-        self.isEditing = !self.isEditing;
-      } else {
-        self.isEditing = newValue;
-      }
-    },
     delete() {
       self.app.deleteCard(self);
     },
-    update(fieldsChange) {
-      self.fields = Object.assign({}, self.fields, fieldsChange);
-    },
   }));
 
-export default Card;
+export default User;

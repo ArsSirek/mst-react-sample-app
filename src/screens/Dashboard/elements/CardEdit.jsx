@@ -4,10 +4,13 @@ import { inject } from 'mobx-react';
 
 import { CardStyled, CardHeader, CardBody } from '../../../components/Card';
 
+import { UserSelect } from './UserSelect';
+
 @inject('appStore')
 export class CardEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
+    this.userSelect = React.createRef();
     this.state = {
       title: props.card.fields.title || '',
       description: props.card.fields.description || '',
@@ -39,9 +42,23 @@ export class CardEdit extends React.Component {
   saveChanges = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    let userId = null;
+    let userSelect = this.userSelect.current.wrappedInstance;
+    if (userSelect) {
+      userId = userSelect.id;
+      if (!userId) {
+        const username = userSelect.state.value;
+        if (username) {
+          userId = this.props.appStore.addUser( username ).id;
+        }
+      }
+    }
+
     this.props.card.update({
       title: this.state.title,
       description: this.state.description,
+      userId: userId,
     });
     this.props.card.toggleIsEditing(false);
   };
@@ -56,8 +73,15 @@ export class CardEdit extends React.Component {
             </span>
           </CardHeader>
           <CardBody>
-            <input type="text" placeholder="title" value={this.state.title} onChange={this.onTitleChange} />
+            <input
+              type="text"
+              autoFocus
+              placeholder="title"
+              value={this.state.title}
+              onChange={this.onTitleChange}
+            />
             <textarea value={this.state.description} onChange={this.onDescriptionChange} />
+            <UserSelect ref={this.userSelect} userId={this.props.card.fields.userId} />
             <button type="submit">
               Save
             </button>

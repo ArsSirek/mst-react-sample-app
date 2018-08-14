@@ -25,7 +25,12 @@ export class Card extends React.Component {
     if (isEditing) {
       return <CardEdit {...this.props} />;
     }
-    const { title, description } = fields;
+    const { title, description, userId } = fields;
+    let user = {};
+    if (userId) {
+      user = this.props.appStore.getUser(userId);
+    }
+
     return (
       <CardStyled {...this.props}>
         <CardHeader>
@@ -36,7 +41,12 @@ export class Card extends React.Component {
           </span>
         </CardHeader>
         <CardBody>
-          {description}
+          <div>
+            {description}
+          </div>
+          <div>
+            {user.name}
+          </div>
         </CardBody>
       </CardStyled>
     );
@@ -49,6 +59,7 @@ Card.propTypes = {
     fields: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
+      user: PropTypes.string,
     }),
   }).isRequired,
 };
