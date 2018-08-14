@@ -9,7 +9,6 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Dashboard } from '../screens/Dashboard';
-import { City } from '../screens/City';
 
 @inject('appStore')
 @observer
@@ -20,8 +19,6 @@ export class App extends React.Component {
     switch (view.page) {
       case 'dashboard':
         return <Dashboard />;
-      case 'city':
-        return <City name={view.selectedCity} />;
       default:
         return (
           <div>

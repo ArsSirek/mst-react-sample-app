@@ -12,10 +12,10 @@ export const Page = styled.main`
 `;
 
 const PageHeaderStyled = styled.header`
-  padding-top: 10%;
+  padding-left: 20px;
   box-sizing: border-box;
   border-bottom: 5px solid rgba(255, 255, 255, .5);
-  max-height: 200px;
+  max-height: 80px;
 `;
 
 export const PageHeader = ({ title }) => (
@@ -32,7 +32,6 @@ PageHeader.propTypes = {
 
 export const PageBody = styled.div`
   margin: 0;
-  padding-top: 5%;
   flex: 1;
 `;
 

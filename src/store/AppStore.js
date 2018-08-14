@@ -1,8 +1,14 @@
 /* eslint no-param-reassign: "off" */
-import { types, onSnapshot, applySnapshot, getEnv } from 'mobx-state-tree';
+import {
+  types,
+  onSnapshot,
+  applySnapshot,
+  getEnv,
+} from 'mobx-state-tree';
+
 import ViewStore from './ViewStore';
 
-const STORAGE_KEY_NAME = 'store';
+const STORAGE_KEY_NAME = 'task_app';
 
 export const AppStore = types.model(
   'AppStore',
@@ -32,7 +38,6 @@ export const AppStore = types.model(
         });
       }
       self.toggleLoading(false);
-      self.updateData();
     },
     readFromLocalStorage() {
       if (self.storage) {
@@ -44,28 +49,6 @@ export const AppStore = types.model(
     },
     toggleLoading(newValue = false) {
       self.isLoading = newValue;
-    },
-    updateWeather(city, data) {
-      self.weather.set(city, data);
-    },
-    addCity(newCityName, silent = false) {
-      if (self.cities.indexOf(newCityName) === -1) {
-        self.cities.push(newCityName);
-        if (!silent) {
-          self.weatherProvider.getForCity(newCityName).then((weatherData) => {
-            // can not modify observable property through callback functions,
-            // only in the action function body
-            self.updateWeather(weatherData.name, weatherData);
-          });
-        }
-      }
-    },
-    updateData() {
-      self.cities.forEach((cityName) => {
-        self.weatherProvider.getForCity(cityName).then((weatherData) => {
-          self.updateWeather(weatherData.name, weatherData);
-        });
-      });
     },
   }));
 
