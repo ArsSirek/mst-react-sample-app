@@ -47,7 +47,15 @@ export class CardEdit extends React.Component {
     let userSelect = this.userSelect.current.wrappedInstance;
     if (userSelect) {
       userId = userSelect.id;
-      if (!userId) {
+      let addNew = !userId;
+      if (userId) {
+        const user = this.props.appStore.getUser(userId);
+        if (user.name !== userSelect.state.vale) {
+          // user have been changed @todo fix logic to use more comprehended autocomplition
+          addNew = true;
+        }
+      }
+      if (addNew) {
         const username = userSelect.state.value;
         if (username) {
           userId = this.props.appStore.addUser( username ).id;
