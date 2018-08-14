@@ -23,11 +23,11 @@ export class Card extends React.Component {
   render() {
     const { fields, isEditing } = this.props.card;
     if (isEditing) {
-      return <CardEdit card={this.props.card} />;
+      return <CardEdit {...this.props} />;
     }
     const { title, description } = fields;
     return (
-      <CardStyled>
+      <CardStyled {...this.props}>
         <CardHeader>
           {title}
           <span style={{ float: 'right' }}>

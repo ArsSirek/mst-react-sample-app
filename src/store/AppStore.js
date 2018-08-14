@@ -18,7 +18,6 @@ export const AppStore = types.model(
     isLoading: types.optional(types.boolean, true),
     view: types.optional(ViewStore, {}),
     cards: types.optional(types.array(Card), []),
-    cardEditing: types.optional(types.array(Card), []),
   },
 )
   .views(self => ({
@@ -56,6 +55,13 @@ export const AppStore = types.model(
     deleteCard(card) {
       self.cards.remove(card);
     },
-  }));
+    reorderCards(startIndex, endIndex) {
+      const result = self.cards.slice();
+      const [removed] = result.splice(startIndex, 1);
+      result.splice(endIndex, 0, removed);
+
+      self.cards = result;
+    },
+}));
 
 export default AppStore;

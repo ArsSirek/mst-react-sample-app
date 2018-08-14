@@ -4,7 +4,7 @@ const path = require('path');
 
 require('dotenv').config({path: path.join(__dirname, '.env')});
 
-let config = {
+const config = {
   entry: './src/index.js',
   module: {
     rules: [
@@ -15,6 +15,7 @@ let config = {
       },
     ],
   },
+  devtool: 'cheap-module-source-map',
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new webpack.DefinePlugin({

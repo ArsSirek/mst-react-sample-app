@@ -25,6 +25,7 @@ export const CardBody = styled.div`
   
   * {
     max-width: calc( 100% - 10px);
+    margin: 5px;
   }
 `;
 

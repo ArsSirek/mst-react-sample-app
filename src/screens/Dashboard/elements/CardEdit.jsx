@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 
 import { CardStyled, CardHeader, CardBody } from '../../../components/Card';
 
 @inject('appStore')
-@observer
 export class CardEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -49,7 +48,7 @@ export class CardEdit extends React.Component {
 
   render() {
     return (
-      <CardStyled>
+      <CardStyled {...this.props}>
         <form onSubmit={this.saveChanges}>
           <CardHeader>
             <span style={{ float: 'right' }}>
