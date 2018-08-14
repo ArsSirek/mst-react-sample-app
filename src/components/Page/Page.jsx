@@ -15,7 +15,7 @@ const PageHeaderStyled = styled.header`
   padding-left: 20px;
   box-sizing: border-box;
   border-bottom: 5px solid rgba(255, 255, 255, .5);
-  max-height: 80px;
+  min-height: 80px;
 `;
 
 export const PageHeader = ({ title }) => (
@@ -32,6 +32,7 @@ PageHeader.propTypes = {
 
 export const PageBody = styled.div`
   margin: 0;
+  padding-top: 10px;
   flex: 1;
 `;
 

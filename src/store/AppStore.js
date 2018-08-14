@@ -6,6 +6,8 @@ import {
   getEnv,
 } from 'mobx-state-tree';
 
+import { Card } from './models/Card';
+
 import ViewStore from './ViewStore';
 
 const STORAGE_KEY_NAME = 'task_app';
@@ -15,22 +17,18 @@ export const AppStore = types.model(
   {
     isLoading: types.optional(types.boolean, true),
     view: types.optional(ViewStore, {}),
-    cities: types.optional(types.array(types.string), []),
-    weather: types.optional(types.map(types.frozen()), {}),
+    cards: types.optional(types.array(Card), []),
+    cardEditing: types.optional(types.array(Card), []),
   },
 )
   .views(self => ({
     get storage() {
       return getEnv(self).storage;
     },
-    get weatherProvider() {
-      return getEnv(self).weather;
-    },
   }))
   .actions(self => ({
     afterCreate() {
-      // self.dashboard.loadDomains();
-      // save menu state
+      // save current app state
       if (typeof window.localStorage !== 'undefined') {
         self.readFromLocalStorage();
         onSnapshot(self, (snapshot) => {
@@ -49,6 +47,14 @@ export const AppStore = types.model(
     },
     toggleLoading(newValue = false) {
       self.isLoading = newValue;
+    },
+    addCard(cardFields) {
+      self.cards.push({
+        fields: cardFields,
+      });
+    },
+    deleteCard(card) {
+      self.cards.remove(card);
     },
   }));
 

@@ -1,20 +1,17 @@
 import React from 'react';
-import { inject } from 'mobx-react';
 
 import { Page, PageHeader, PageBody } from '../../components/Page';
 
-@inject('appStore')
-export class Dashboard extends React.Component {
-  render() {
-    return (
-      <Page>
-        <PageHeader title="Task Management" />
-        <PageBody>
+import { ControlLine, Cards } from './elements';
 
-        </PageBody>
-      </Page>
-    );
-  }
-}
+export const Dashboard = () => (
+  <Page>
+    <PageHeader title="Task Management" />
+    <PageBody>
+      <ControlLine />
+      <Cards />
+    </PageBody>
+  </Page>
+);
 
 export default Dashboard;
